@@ -5,7 +5,7 @@ public class main {
         System.out.println("");
 
 
-      //  createCystomer();
+         DataGenerator.createCustomer();
       //  createCategore();
       //  createProduct();
        // createBalance();

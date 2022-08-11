@@ -1,0 +1,28 @@
+package company.category;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+public abstract class Category {
+
+    private UUID id;
+    private String name;
+
+    public Category(UUID id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+    public abstract LocalDateTime findDeliveryDueDate();
+
+    public String generateCategoryCode(){
+        return id.toString().substring(0,8).concat("-").concat(0,2);
+    }
+}
