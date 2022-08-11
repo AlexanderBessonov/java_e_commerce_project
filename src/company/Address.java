@@ -3,7 +3,7 @@ package company;
 public class Address {
     private String StreetNumber;
     private String StreetName;
-    private String additionalAddressLine
+    private String additionalAddressLine;
     private String zipCode;
     private String state;
 
