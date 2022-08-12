@@ -15,7 +15,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Select com.cydeo.Customer:");
+        System.out.println("Select Customer:");
         for(int i = 0; i< StaticConstants.CUSTOMER_LIST.size(); i++){
             System.out.println("Type " + i + " for customer:" + StaticConstants.CUSTOMER_LIST.get(i).getUserName());
         }
@@ -31,11 +31,18 @@ public class Main {
             switch (menuSelection){
                 case 0:
                     for(Category category : StaticConstants.CATEGORY_LIST){
-                        System.out.println("Category Code:" + category.generateCategoryCode() + " com.cydeo.category name:" + category.getName());
+                        System.out.println("Category Code:" + category.generateCategoryCode() + " category name:" + category.getName());
                     }
                     break;
                 case 1:
+                    try{
+                        for(Product product : StaticConstants.PRODUCT_LIST){
+                            System.out.println("Product Name:" + product.getName() + "Product Category Name:" + product.getCategoryName());
+                        }
 
+                    }catch(Exception e){
+                        System.out.println("Product could not printed because category not found for product name:" + e.getMessage().split(",")[1] );
+                    }
                     break;
                 case 2:
                     break;
@@ -61,6 +68,6 @@ public class Main {
     }
     private static String[] prepareMenuOptions(){
         return new String[]{"List Categories","List Products","List Discount","See Balance","Add Balance",
-                "Place an com.cydeo.order","See com.cydeo.Cart","See com.cydeo.order details","See your address","Close App"};
+                "Place an order","See Cart","See order details","See your address","Close App"};
     }
 }
