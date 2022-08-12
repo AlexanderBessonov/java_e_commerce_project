@@ -15,5 +15,6 @@ public class Furniture extends Category{
         return localDateTime.plusDays(1);
     }
 
+
 }
 
