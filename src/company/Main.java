@@ -1,5 +1,7 @@
 package company;
 
+import company.category.Category;
+
 import java.util.Scanner;
 
 public class Main {
@@ -28,8 +30,12 @@ public class Main {
             int menuSelection = scanner.nextInt();
             switch (menuSelection){
                 case 0:
+                    for(Category category : StaticConstants.CATEGORY_LIST){
+                        System.out.println("Category Code:" + category.generateCategoryCode() + " com.cydeo.category name:" + category.getName());
+                    }
                     break;
                 case 1:
+
                     break;
                 case 2:
                     break;
