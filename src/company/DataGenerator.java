@@ -7,6 +7,9 @@ import company.category.Category;
 import company.category.Electronic;
 import company.category.Furniture;
 import company.category.SkinCare;
+import company.discount.AmountBasedDiscount;
+import company.discount.Discount;
+import company.discount.RateBasedDiscount;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +71,16 @@ public class DataGenerator {
 
         StaticConstants.CUSTOMER_BALANCE_LIST.add(customerBalance);
         StaticConstants.GIFT_CARD_BALANCE_LIST.add(giftCardBalance);
+    }
+
+    public static void createDiscount(){
+
+        Discount amountBasedDiscount = new AmountBasedDiscount(UUID.randomUUID(),"Buy 250 Free 50",250.00,50.00);
+        Discount rateBasedDiscount = new RateBasedDiscount(UUID.randomUUID(),"Buy 500 Free %15",500.00,15.00);
+
+        StaticConstants.DISCOUNT_LIST.add(amountBasedDiscount);
+        StaticConstants.DISCOUNT_LIST.add(rateBasedDiscount);
+
     }
 
 }
