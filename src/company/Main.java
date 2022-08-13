@@ -10,7 +10,7 @@ public class Main {
          DataGenerator.createCustomer();
           DataGenerator.createCategory();
       DataGenerator.createProduct();
-       // createBalance();
+        DataGenerator.createBalance();
       //  createDiscount();
 
         Scanner scanner = new Scanner(System.in);
