@@ -16,7 +16,7 @@ public class Main {
           DataGenerator.createCategory();
       DataGenerator.createProduct();
         DataGenerator.createBalance();
-      //  createDiscount();
+      DataGenerator.createDiscount();
 
         Scanner scanner = new Scanner(System.in);
 
@@ -64,6 +64,18 @@ public class Main {
                     break;
 
                 case 4:
+                    CustomerBalance customerBalance = findCustomerBalance(customer.getId());
+                    GiftCardBalance giftCardBalance= findGiftCardBalance(customer.getId());
+
+                    System.out.println("Which Account would you like to add?");
+                    System.out.println("Type 1 for Customer Balance:" + customerBalance.getBalance());
+                    System.out.println("Type 2 for Gift Card Balance:" + giftCardBalance.getBalance());
+
+                    int balanceAccountSelection = scanner.nextInt();
+                    System.out.println("How much you would like to add?");
+                    double additionalAmount = scanner.nextInt();
+
+
                     break;
                 case 5:
                     break;
