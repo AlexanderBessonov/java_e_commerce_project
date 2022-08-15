@@ -63,7 +63,7 @@ public class Main {
                     System.out.println("Gift Card Balance:" + gBalance.getBalance());
                     break;
 
-                case 4:
+                case 4://"See Balance"
                     CustomerBalance customerBalance = findCustomerBalance(customer.getId());
                     GiftCardBalance giftCardBalance= findGiftCardBalance(customer.getId());
 
@@ -75,6 +75,16 @@ public class Main {
                     System.out.println("How much you would like to add?");
                     double additionalAmount = scanner.nextInt();
 
+                    switch(balanceAccountSelection){
+                        case 1:
+                            customerBalance.addBalance(additionalAmount);
+                            System.out.println("New Customer Balance:" + customerBalance.getBalance());
+                            break;
+                        case 2:
+                            giftCardBalance.addBalance(additionalAmount);
+                            System.out.println("New Gift Card Balance:" + giftCardBalance.getBalance());
+                            break;
+                    }
 
                     break;
                 case 5:
