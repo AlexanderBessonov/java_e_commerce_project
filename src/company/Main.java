@@ -124,6 +124,26 @@ public class Main {
                         if(!decision.equals("Y")){
                             break;
                         }
+
+                        System.out.println("seems there are discount options. Do you want to see and apply to your" +
+                                " cart if it is applicable. For no discount type no");
+                        for (Discount discount : StaticConstants.DISCOUNT_LIST) {
+                            System.out.println("discount id " + discount.getId() + " discount name: "
+                                    + discount.getName());
+                        }
+                        String discountId = scanner.next();
+                        if (!discountId.equals("no")) {
+                            try {
+                                Discount discount = findDiscountById(discountId);
+                                if (discount.decideDiscountIsApplicableToCart(cart)) {
+                                    cart.setDiscountId(discount.getId());
+                                }
+                            } catch (Exception e) {
+                                System.out.println(e.getMessage());
+
+                            }
+
+                        }
                     }
 
 
@@ -142,7 +162,15 @@ public class Main {
             }
 
         }
+    private static Discount findDiscountById(String discountId) throws Exception {
+        for (Discount discount : StaticConstants.DISCOUNT_LIST) {
+            if (discount.getId().toString().equals(discountId)) {
+                return discount;
+            }
+        }
+        throw new Exception("Discount couldn't applied because couldn't found");
 
+    }
         private static String[] prepareMenuOptions () {
             return new String[]{"List Categories", "List Products", "List Discount", "See Balance", "Add Balance",
                     "Place an order", "See Cart", "See order details", "See your address", "Close App"};
