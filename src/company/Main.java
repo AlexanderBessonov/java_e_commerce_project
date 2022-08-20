@@ -63,7 +63,7 @@ public class Main {
                     System.out.println("Gift Card Balance:" + gBalance.getBalance());
                     break;
 
-                case 4://"See Balance"
+                case 4://"Add Balance"
                     CustomerBalance customerBalance = findCustomerBalance(customer.getId());
                     GiftCardBalance giftCardBalance= findGiftCardBalance(customer.getId());
 
@@ -87,7 +87,7 @@ public class Main {
                     }
 
                     break;
-                case 5:
+                case 5:// "Place an order"
                     break;
                 case 6:
                     break;
