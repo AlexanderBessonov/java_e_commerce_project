@@ -1,23 +1,28 @@
 package company.order;
 
 import company.Cart;
+import company.checkout.CheckoutService;
+import company.checkout.CustomerBalanceCheckoutServiceImpl;
+import company.checkout.MixPaymentCheckoutServiceImpl;
 import company.discount.Discount;
 
-import javax.swing.*;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.UUID;
 
 import static company.StaticConstants.DISCOUNT_LIST;
+import static company.StaticConstants.ORDER_LIST;
 
 public class OrderServiceImpl implements OrderService {
     @Override
+
     public String placeOrder(Cart cart) {
         double amountAfterDiscount = cart.calculateCartTotalAmount();
 
 
         if (cart.getDiscountId() != null){
             try {
-               Discount discount = findDiscountById(cart.getDiscountId());
+                Discount discount = findDiscountById(cart.getDiscountId());
                 amountAfterDiscount = discount.calculateCartAmountAfterDiscountApplied(amountAfterDiscount);
             }catch (Exception e){
                 System.out.println(e.getMessage());
@@ -28,14 +33,30 @@ public class OrderServiceImpl implements OrderService {
         System.out.println("which payment option you would like to choose, Type 1 : customer balance, Type 2 : Mix (gift card + customer balance)");
         int paymentType = scanner.nextInt();
         boolean checkoutResult = false;
-
         switch (paymentType){
             case 1:
-            Checku
+                CheckoutService customerBalanceCheckoutService = new CustomerBalanceCheckoutServiceImpl();
+                checkoutResult = customerBalanceCheckoutService.checkout(cart.getCustomer(), amountAfterDiscount);
+                break;
+            case 2:
+                CheckoutService mixPaymentCheckoutService = new MixPaymentCheckoutServiceImpl();
+                checkoutResult = mixPaymentCheckoutService.checkout(cart.getCustomer(), amountAfterDiscount);
+                break;
         }
 
 
+        if (checkoutResult){
+            Order order = new Order(UUID.randomUUID(), LocalDateTime.now(),
+                    cart.calculateCartTotalAmount(), amountAfterDiscount,
+                    cart.calculateCartTotalAmount() - amountAfterDiscount, cart.getCustomer().getId()
+                    , "Placed", cart.getProductMap().keySet());
+            ORDER_LIST.add(order);
+            return "Order has been placed successfully";
+        }else {
+            return "Balance is insufficient. Please add money to your one of balances and try again.";
+        }
     }
+
     private Discount findDiscountById(UUID discountId) throws Exception {
         for (Discount discount : DISCOUNT_LIST){
             if (discount.getId().toString().equals(discountId.toString())){
@@ -44,4 +65,5 @@ public class OrderServiceImpl implements OrderService {
         }
         throw new Exception("Discount couldn't found");
     }
+
 }
