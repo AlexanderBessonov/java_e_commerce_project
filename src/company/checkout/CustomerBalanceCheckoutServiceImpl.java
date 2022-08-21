@@ -21,6 +21,13 @@ public class CustomerBalanceCheckoutServiceImpl implements CheckoutService{
         return false;
     }
     private static CustomerBalance findCustomerBalance(UUID customerId){
-
+        for(Balance customerBalance : StaticConstants.CUSTOMER_BALANCE_LIST){
+            if(customerBalance.getCustomerId().toString().equals(customerId.toString())){
+                return (CustomerBalance) customerBalance;
+            }
+        }
+          CustomerBalance customerBalance = new CustomerBalance(customerId, 0d);
+         StaticConstants.CUSTOMER_BALANCE_LIST.add(customerBalance);
+         return customerBalance;
     }
 }
